@@ -1,3 +1,11 @@
+This app was used to test RSK Data Vault SDK web implementation for authentication.
+
+To run it
+
+1. Clone RIF Data Vault, set it up and `yarn link` `@rsksmart/ipfs-cpinner-client`
+2. Clone this repo, set it up with `yarn` and run `yarn link @rsksmart/ipfs-cpinner-client`
+3. Install Metamask :)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
