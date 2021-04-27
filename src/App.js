@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import DataVault, { AuthManager, AsymmetricEncryptionManager } from '@rsksmart/ipfs-cpinner-client'
+import DataVault, { AuthManager, AsymmetricEncryptionManager, SignerEncryptionManager } from '@rsksmart/ipfs-cpinner-client'
 import './App.css';
 
-const serviceUrl = 'https://localhost:5107'
+const serviceUrl = 'https://data-vault.identity.rifos.org'
 
 function App() {
   const [account, setAccount] = useState('')
@@ -16,11 +16,11 @@ function App() {
   const connectToDataVault = async () => {
     const dataVault = new DataVault({
       serviceUrl,
-      authManager: new AuthManager({
+      authManager: !window.ethereum.isNifty ? new AuthManager({
         did,
         serviceUrl,
         personalSign: (data) => window.ethereum.request({ method: 'personal_sign', params: [data, account] })
-      }),
+      }) : new SignerEncryptionManager.fromWeb3Provider(window.ethereum),
       encryptionManager: await AsymmetricEncryptionManager.fromWeb3Provider(window.ethereum)
     })
 
